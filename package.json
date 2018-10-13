@@ -1,0 +1,32 @@
+{
+  "name": "amap-geohash-layer",
+  "version": "1.0.0",
+  "description": "geohash mesh layer for AMap",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src/*.js --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haowen737/amap-geohash-layer.git"
+  },
+  "keywords": [
+    "amap",
+    "geohash"
+  ],
+  "author": "Haowen <haowen737@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/haowen737/amap-geohash-layer/issues"
+  },
+  "homepage": "https://github.com/haowen737/amap-geohash-layer#readme",
+  "dependencies": {
+    "ngeohash": "^0.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.7.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  }
+}
