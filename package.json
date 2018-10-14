@@ -2,10 +2,11 @@
   "name": "amap-geohash-layer",
   "version": "1.0.0",
   "description": "geohash mesh layer for AMap",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint src/*.js --fix"
+    "lint": "eslint src/*.js --fix",
+    "build": "babel src -d lib"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,9 @@
     "ngeohash": "^0.6.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
     "eslint": "^5.7.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0"
