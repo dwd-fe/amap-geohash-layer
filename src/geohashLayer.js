@@ -27,6 +27,7 @@ export default class GeohashLayer {
     this.lngSet = new Set()
 
     this.shouldLayerRender = this.shouldLayerRender.bind(this)
+    this.shouldLayerRender()// render when new GeohashLayer
 
     this.map.on('zoomend', this.shouldLayerRender)
     this.map.on('moveend', this.shouldLayerRender)
