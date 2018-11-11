@@ -26,7 +26,7 @@ export default class GeohashLayer {
     this.map = map
     this.polylineStyle = { strokeColor, strokeOpacity, strokeWeight, strokeStyle }
     this.padding = padding || 0.03
-    this.zoomLimit = zoomLimit || 13
+    this.zoomLimit = zoomLimit || 14
     this.overlayGroup = new window.AMap.OverlayGroup([]);
     this.overlayGroup.setMap(map)
 
@@ -34,10 +34,14 @@ export default class GeohashLayer {
     this.lngSet = new Set()
 
     this.shouldLayerRender = this.shouldLayerRender.bind(this)
-    this.shouldLayerRender()// render when new GeohashLayer
+    // this.shouldLayerRender()// render when new GeohashLayer
 
     this.map.on('zoomend', this.shouldLayerRender)
     this.map.on('moveend', this.shouldLayerRender)
+  }
+
+  render() {
+    this.shouldLayerRender()
   }
 
 
@@ -47,10 +51,10 @@ export default class GeohashLayer {
       this.overlayGroup.hide()
       return
     }
-    this.render()
+    this.main()
   }
 
-  render() {
+  main() {
     const { padding } = this
     const bounds = this.map.getBounds()
     const { southwest, northeast } = bounds
@@ -84,6 +88,7 @@ export default class GeohashLayer {
       lng && (horizon.push(Overlays.Polyline([[lng, maxLat], [lng, minLat]], lng, this.polylineStyle)))
       lat && (vertical.push(Overlays.Polyline([[maxLng, lat], [minLng, lat]], lat, this.polylineStyle)))
     }
+    console.log('this.polylineStyle)--', this.polylineStyle)
     this.overlayGroup.clearOverlays()
     this.overlayGroup.addOverlays([...vertical, ...horizon])
     this.latSet.clear()
