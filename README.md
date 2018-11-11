@@ -1,7 +1,7 @@
 # amap-geohash-layer
 geohash mesh layer for AMap. 高德地图geohash网格图层
 
-> geohashLayer read coords directly from amap api, which means so there is no need to transform coordinates, geohashLayer will also return GCJ02 coordinates.
+<p align="center"><img src="https://github.com/haowen737/pada/blob/master/docs/example.jpeg?raw=true"></p>
 
 ## USAGE
 

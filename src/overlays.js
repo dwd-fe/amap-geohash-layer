@@ -1,10 +1,9 @@
 const Polyline = (path, extData, style) => new window.AMap.Polyline({
   path,
   extData,
-  ...style,
-  strokeWeight: 1,
-  strokeColor: '#000000',
-  strokeOpacity: 0.1,
+  strokeWeight: style.strokeWeight || 1,
+  strokeColor: style.strokeColor || '#000000',
+  strokeOpacity: style.strokeOpacity || 0.2,
 })
 
 export default {
