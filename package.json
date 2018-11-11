@@ -1,6 +1,6 @@
 {
   "name": "amap-geohash-layer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "geohash mesh layer for AMap",
   "main": "lib/index.js",
   "scripts": {
@@ -15,6 +15,9 @@
   "keywords": [
     "amap",
     "geohash"
+  ],
+  "files": [
+    "lib"
   ],
   "author": "Haowen <haowen737@gmail.com>",
   "license": "MIT",

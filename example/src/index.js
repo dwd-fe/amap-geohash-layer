@@ -14,7 +14,7 @@ class App extends Component {
     window.__amap_init_callback = () => {
       window.__amap_init_callback = null;
       const map = new window.AMap.Map("app", { zoom: 15 });
-      const geohashLayer = new GeohashLayer({ map })
+      const geohashLayer = new GeohashLayer({ map, strokeOpacity: 1, strokeColor: 'red' })
       geohashLayer.render()
     };
   }

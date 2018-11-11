@@ -27,15 +27,14 @@ export default class GeohashLayer {
     this.polylineStyle = { strokeColor, strokeOpacity, strokeWeight, strokeStyle }
     this.padding = padding || 0.03
     this.zoomLimit = zoomLimit || 14
-    this.overlayGroup = new window.AMap.OverlayGroup([]);
-    this.overlayGroup.setMap(map)
-
+    this.layerx = Overlays.Polyline([], null, this.polylineStyle)
+    this.layery = Overlays.Polyline([], null, this.polylineStyle)
+    this.layerx.setMap(map)
+    this.layery.setMap(map)
     this.latSet = new Set()
     this.lngSet = new Set()
 
     this.shouldLayerRender = this.shouldLayerRender.bind(this)
-    // this.shouldLayerRender()// render when new GeohashLayer
-
     this.map.on('zoomend', this.shouldLayerRender)
     this.map.on('moveend', this.shouldLayerRender)
   }
@@ -44,17 +43,17 @@ export default class GeohashLayer {
     this.shouldLayerRender()
   }
 
-
   shouldLayerRender() {
     this.invariant()
     if (this.map.getZoom() < this.zoomLimit) {
-      this.overlayGroup.hide()
+      this.layerx.hide()
+      this.layery.hide()
       return
     }
     this.main()
   }
 
-  main() {
+  main () {
     const { padding } = this
     const bounds = this.map.getBounds()
     const { southwest, northeast } = bounds
@@ -75,22 +74,34 @@ export default class GeohashLayer {
     }
     const latList = [...this.latSet]
     const lngList = [...this.lngSet]
-    const vertical = []
-    const horizon = []
-    const maxLng = northeast.lng + padding
-    const minLng = southwest.lng - padding
-    const maxLat = northeast.lat + padding
-    const minLat = southwest.lat - padding
-    const loop = lngList.length > latList.length ? lngList.length : latList.length
-    for (let i = 0; i < loop; i++) {
-      const lat = latList[i]
-      const lng = lngList[i]
-      lng && (horizon.push(Overlays.Polyline([[lng, maxLat], [lng, minLat]], lng, this.polylineStyle)))
-      lat && (vertical.push(Overlays.Polyline([[maxLng, lat], [minLng, lat]], lat, this.polylineStyle)))
+    const latLength = latList.length - 1
+    const lngLength = lngList.length - 1
+    const minLat = latList[0] - padding
+    const minLng = lngList[0] - padding
+    const maxLat = latList[latLength] + padding
+    const maxLng = lngList[lngLength] + padding
+    const pathx = []
+    const pathy = []
+    for (let i = 0; i < lngLength; i++) {
+      const isOdd = i % 2
+      const stepDown = [lngList[i], minLat]
+      const stepUp = [lngList[i], maxLat]
+      isOdd
+        ? pathx.push(stepDown, stepUp)
+        : pathx.push(stepUp, stepDown)
     }
-    console.log('this.polylineStyle)--', this.polylineStyle)
-    this.overlayGroup.clearOverlays()
-    this.overlayGroup.addOverlays([...vertical, ...horizon])
+    for (let i = 0; i < latLength; i++) {
+      const isOdd = i % 2
+      const stepDown = [minLng, latList[i]]
+      const stepUp = [maxLng, latList[i]]
+      isOdd
+        ? pathy.push(stepDown, stepUp)
+        : pathy.push(stepUp, stepDown)
+    }
+    this.layerx.setPath(pathx)
+    this.layery.setPath(pathy)
+    this.layerx.show()
+    this.layery.show()
     this.latSet.clear()
     this.lngSet.clear()
   }
@@ -98,7 +109,10 @@ export default class GeohashLayer {
   destroy() {
     this.map.off('zoomend', this.shouldLayerRender)
     this.map.off('moveend', this.shouldLayerRender)
-    this.overlayGroup && (this.overlayGroup.clearOverlays())
+    this.layerx && this.layerx.setMap(null)
+    this.layery && this.layery.setMap(null)
+    this.layerx = null
+    this.layerx = null
   }
 
   invariant() {
