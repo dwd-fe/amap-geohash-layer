@@ -53,7 +53,7 @@ export default class GeohashLayer {
     this.main()
   }
 
-  main () {
+  main() {
     const { padding } = this
     const bounds = this.map.getBounds()
     const { southwest, northeast } = bounds
@@ -112,7 +112,7 @@ export default class GeohashLayer {
     this.layerx && this.layerx.setMap(null)
     this.layery && this.layery.setMap(null)
     this.layerx = null
-    this.layerx = null
+    this.layery = null
   }
 
   invariant() {
