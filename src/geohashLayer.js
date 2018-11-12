@@ -27,8 +27,8 @@ export default class GeohashLayer {
     this.polylineStyle = { strokeColor, strokeOpacity, strokeWeight, strokeStyle }
     this.padding = padding || 0.03
     this.zoomLimit = zoomLimit || 14
-    this.layerx = Overlays.Polyline([], null, this.polylineStyle)
-    this.layery = Overlays.Polyline([], null, this.polylineStyle)
+    this.layerx = Overlays.Polyline([], 'amap-geohash-layerx', this.polylineStyle)
+    this.layery = Overlays.Polyline([], 'amap-geohash-layery', this.polylineStyle)
     this.layerx.setMap(map)
     this.layery.setMap(map)
     this.latSet = new Set()
