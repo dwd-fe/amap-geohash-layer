@@ -22,4 +22,4 @@ geohash mesh layer for AMap. 高德地图geohash网格图层
 
 ## FEATURE
 
-- render line if out of bounds + padding
+- Support multi geohash precision

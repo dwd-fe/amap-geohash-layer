@@ -1,6 +1,6 @@
 {
   "name": "amap-geohash-layer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "geohash mesh layer for AMap",
   "main": "lib/index.js",
   "scripts": {
