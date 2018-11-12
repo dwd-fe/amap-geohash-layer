@@ -3,6 +3,8 @@ geohash mesh layer for AMap. 高德地图geohash网格图层
 
 <p align="center"><img src="https://github.com/haowen737/amap-geohash-layer/blob/master/docs/example.jpeg?raw=true"></p>
 
+> Supported precision of the geohash for now is 7
+
 ## USAGE
 
 ```
